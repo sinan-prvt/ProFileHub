@@ -1,28 +1,34 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Resume from "./components/Resume";
-import CoverLetters from "./components/CoverLetters";
-import EmailTemplates from "./components/EmailTemplates";
-import Workflow from "./components/Workflow";
-import InterviewPrep from "./components/InterviewPrep";
-import Contact from "./components/Contact";
+import { Routes, Route } from "react-router-dom";
+import BottomNav from "./components/BottomNav";
+import HomePage from "./pages/HomePage";
+import ResumePage from "./pages/ResumePage";
+import CoverLettersPage from "./pages/CoverLettersPage";
+import EmailsPage from "./pages/EmailsPage";
+import FirstCallPage from "./pages/FirstCallPage";
+import InterviewPage from "./pages/InterviewPage";
+import WorkflowPage from "./pages/WorkflowPage";
+import SalaryPage from "./pages/SalaryPage";
+import ContactPage from "./pages/ContactPage";
+import MorePage from "./pages/MorePage";
 
 function App() {
   return (
     <div className="app-shell">
-      <Navbar />
-      <Hero />
-      <main className="bento-container">
-        <section className="bento-item bento-item--full"><Resume /></section>
-        <section className="bento-item bento-item--half"><CoverLetters /></section>
-        <section className="bento-item bento-item--half"><EmailTemplates /></section>
-        <section className="bento-item bento-item--full"><Workflow /></section>
-        <section className="bento-item bento-item--half"><InterviewPrep /></section>
-        <section className="bento-item bento-item--half"><Contact /></section>
-      </main>
-      <footer className="footer-simple">
-        <p>&copy; {new Date().getFullYear()} SINAN. Built for technical perfection.</p>
-      </footer>
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/cover-letters" element={<CoverLettersPage />} />
+          <Route path="/emails" element={<EmailsPage />} />
+          <Route path="/first-call" element={<FirstCallPage />} />
+          <Route path="/interview" element={<InterviewPage />} />
+          <Route path="/workflow" element={<WorkflowPage />} />
+          <Route path="/salary" element={<SalaryPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/more" element={<MorePage />} />
+        </Routes>
+      </div>
+      <BottomNav />
     </div>
   );
 }

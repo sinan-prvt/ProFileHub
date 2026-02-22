@@ -3,49 +3,94 @@ import { resumeData } from "../data/resumeData";
 const Resume = () => {
     return (
         <section id="resume">
-            <div className="section-header-bento">
-                <span className="section-tag-bento">Core Architecture</span>
-                <h2 className="section-title-bento">Professional Protocol</h2>
+            {/* Experience */}
+            <div className="section-header">
+                <span className="section-tag">Experience</span>
+                <h2 className="section-title">Professional Journey</h2>
             </div>
 
-            {/* Experience */}
-            <div className="tech-list m-bento">
+            <div className="stack stack--md">
                 {resumeData.experience.map((exp) => (
-                    <div key={exp.id} className="tech-item">
-                        <div className="experience-item__header">
+                    <div key={exp.id} className="exp-card">
+                        <div className="exp-card__header">
                             <div>
-                                <h3 className="text-gradient-tech" style={{ fontSize: '1.25rem', marginBottom: '4px' }}>{exp.role}</h3>
-                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{exp.company}</span>
+                                <h3 className="exp-card__role text-gradient">{exp.role}</h3>
+                                <span className="exp-card__company">{exp.company} — {exp.location}</span>
                             </div>
-                            <span style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 'bold' }}>{exp.period}</span>
+                            <span className="exp-card__period">{exp.period}</span>
                         </div>
-                        <ul className="experience-item__details" style={{ marginTop: '16px', listStyle: 'none', padding: 0 }}>
+                        <ul className="exp-card__highlights">
                             {exp.highlights.map((h, i) => (
-                                <li key={i} style={{ marginBottom: '8px', color: 'var(--text-muted)', fontSize: '0.95rem', paddingLeft: '20px', position: 'relative' }}>
-                                    <span style={{ position: 'absolute', left: 0, color: 'var(--accent)' }}>›</span>
-                                    {h}
-                                </li>
+                                <li key={i} className="exp-card__highlight">{h}</li>
                             ))}
                         </ul>
                     </div>
                 ))}
             </div>
 
-            {/* Skills (Internal Bento) */}
-            <div className="section-header-bento" style={{ marginTop: '64px' }}>
-                <span className="section-tag-bento">Neural Stack</span>
-                <h2 className="section-title-bento">Technical Capabilities</h2>
+            {/* Projects */}
+            <div className="section-header" style={{ marginTop: '40px' }}>
+                <span className="section-tag">Projects</span>
+                <h2 className="section-title">Key Projects</h2>
             </div>
-            <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-                {resumeData.skills.map((group) => (
-                    <div key={group.category} className="tech-item" style={{ padding: '20px' }}>
-                        <h4 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px', color: 'var(--accent)' }}>{group.category}</h4>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                            {group.items.map((skill) => (
-                                <span key={skill} style={{ fontSize: '0.85rem', color: 'var(--text-primary)', background: 'rgba(255,255,255,0.05)', padding: '4px 10px', borderRadius: '4px' }}>{skill}</span>
+
+            <div className="stack stack--md stack--projects">
+                {resumeData.projects.map((proj) => (
+                    <div key={proj.id} className="project-card">
+                        <h3 className="project-card__title text-gradient">{proj.title}</h3>
+                        <p className="project-card__subtitle">{proj.subtitle}</p>
+                        <ul className="project-card__highlights">
+                            {proj.highlights.map((h, i) => (
+                                <li key={i} className="project-card__highlight">{h}</li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
+                ))}
+            </div>
+
+            {/* Skills */}
+            <div className="skills-section">
+                <div className="section-header">
+                    <span className="section-tag">Stack</span>
+                    <h2 className="section-title">Technical Skills</h2>
+                </div>
+                <div className="skills-grid">
+                    {resumeData.skills.map((group) => (
+                        <div key={group.category} className="skill-group">
+                            <h4 className="skill-group__title">{group.category}</h4>
+                            <div className="skill-chips">
+                                {group.items.map((skill) => (
+                                    <span key={skill} className="skill-chip">{skill}</span>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Education */}
+            <div className="section-header" style={{ marginTop: '40px' }}>
+                <span className="section-tag">Education</span>
+                <h2 className="section-title">Academic Background</h2>
+            </div>
+            <div className="stack stack--md">
+                {resumeData.education.map((edu) => (
+                    <div key={edu.id} className="edu-item">
+                        <span className="edu-item__degree">{edu.degree}</span>
+                        <span className="edu-item__institution">{edu.institution}</span>
+                        <span className="edu-item__period">{edu.period}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Certifications */}
+            <div className="section-header" style={{ marginTop: '40px' }}>
+                <span className="section-tag">Certifications</span>
+                <h2 className="section-title">Credentials</h2>
+            </div>
+            <div className="stack stack--sm">
+                {resumeData.certifications.map((cert, i) => (
+                    <div key={i} className="cert-item">{cert}</div>
                 ))}
             </div>
         </section>

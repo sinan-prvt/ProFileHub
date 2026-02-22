@@ -10,11 +10,24 @@ function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => { document.body.style.overflow = ""; };
+    }, [isOpen]);
+
     const navLinks = [
-        { href: "#hero", label: "Studio" },
-        { href: "#resume", label: "Experience" },
-        { href: "#workflow", label: "Strategy" },
-        { href: "#contact", label: "Connection" },
+        { href: "#hero", label: "Home" },
+        { href: "#resume", label: "Resume" },
+        { href: "#first-call", label: "First Call" },
+        { href: "#email-templates", label: "Templates" },
+        { href: "#workflow", label: "Workflow" },
+        { href: "#interview-prep", label: "Interview" },
+        { href: "#salary", label: "Salary" },
+        { href: "#contact", label: "Contact" },
     ];
 
     const handleNavClick = (e, href) => {
@@ -27,8 +40,12 @@ function Navbar() {
     return (
         <nav className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
             <div className="navbar__container">
-                <a href="#hero" className="navbar__logo" onClick={(e) => handleNavClick(e, "#hero")}>
-                    SINAN.DEV
+                <a
+                    href="#hero"
+                    className="navbar__logo"
+                    onClick={(e) => handleNavClick(e, "#hero")}
+                >
+                    SINAN<span style={{ color: 'var(--accent-light)' }}>.</span>DEV
                 </a>
 
                 <div className={`navbar__links ${isOpen ? "navbar__links--open" : ""}`}>

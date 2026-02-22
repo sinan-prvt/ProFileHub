@@ -1,17 +1,29 @@
 import { useState } from "react";
 import { emailTemplates } from "../data/emailTemplatesData";
 
+const ChevronIcon = () => (
+    <svg className="accordion-header__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="5 8 10 13 15 8" />
+    </svg>
+);
+
 const EmailTemplates = () => {
     const [openId, setOpenId] = useState(null);
     const [copiedId, setCopiedId] = useState(null);
+    const [activeCategory, setActiveCategory] = useState("All");
 
     const toggle = (id) => setOpenId(openId === id ? null : id);
+
+    const categories = ["All", ...new Set(emailTemplates.map((t) => t.category))];
+
+    const filtered =
+        activeCategory === "All"
+            ? emailTemplates
+            : emailTemplates.filter((t) => t.category === activeCategory);
 
     const copyToClipboard = async (text, id) => {
         try {
             await navigator.clipboard.writeText(text);
-            setCopiedId(id);
-            setTimeout(() => setCopiedId(null), 2000);
         } catch {
             const ta = document.createElement("textarea");
             ta.value = text;
@@ -19,61 +31,57 @@ const EmailTemplates = () => {
             ta.select();
             document.execCommand("copy");
             document.body.removeChild(ta);
-            setCopiedId(id);
-            setTimeout(() => setCopiedId(null), 2000);
         }
+        setCopiedId(id);
+        setTimeout(() => setCopiedId(null), 2000);
     };
 
     return (
         <section id="email-templates">
-            <div className="section-header-bento">
-                <span className="section-tag-bento">Correspondence</span>
-                <h2 className="section-title-bento">Email Frameworks</h2>
+            <div className="section-header">
+                <span className="section-tag">Templates</span>
+                <h2 className="section-title">Email & Messages</h2>
             </div>
 
-            <div className="tech-list">
-                {emailTemplates.map((template) => (
-                    <div key={template.id} className="tech-item" style={{ padding: 0, overflow: 'hidden' }}>
-                        <div
-                            onClick={() => toggle(template.id)}
-                            style={{
-                                padding: '24px',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                background: openId === template.id ? 'rgba(255,255,255,0.03)' : 'transparent'
-                            }}
-                        >
-                            <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--text-primary)' }}>{template.title}</h3>
+            <div className="tab-bar">
+                {categories.map((cat) => (
+                    <button
+                        key={cat}
+                        className={`tab-btn ${activeCategory === cat ? "tab-btn--active" : ""}`}
+                        onClick={() => { setActiveCategory(cat); setOpenId(null); }}
+                    >
+                        {cat}
+                    </button>
+                ))}
+            </div>
+
+            <div className="accordion-list">
+                {filtered.map((template) => (
+                    <div
+                        key={template.id}
+                        className={`accordion-item ${openId === template.id ? "open" : ""}`}
+                    >
+                        <div className="accordion-header" onClick={() => toggle(template.id)}>
+                            <div className="accordion-header__info">
+                                <div className="accordion-header__title">{template.title}</div>
+                                <div className="accordion-header__sub">{template.category}</div>
+                            </div>
                             <button
-                                className="btn-tech"
-                                style={{ padding: '6px 16px', fontSize: '0.7rem' }}
+                                className={`btn btn--copy ${copiedId === template.id ? "copied" : ""}`}
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     copyToClipboard(template.content, template.id);
                                 }}
                             >
-                                {copiedId === template.id ? "Success" : "Copy"}
+                                {copiedId === template.id ? "✓ Copied" : "Copy"}
                             </button>
+                            <ChevronIcon />
                         </div>
-                        {openId === template.id && (
-                            <div style={{
-                                padding: '24px',
-                                borderTop: '1px solid var(--border)',
-                                background: 'rgba(5, 5, 5, 0.4)'
-                            }}>
-                                <pre style={{
-                                    fontFamily: 'monospace',
-                                    whiteSpace: 'pre-wrap',
-                                    fontSize: '0.9rem',
-                                    lineHeight: '1.6',
-                                    color: 'var(--text-muted)'
-                                }}>
-                                    {template.content}
-                                </pre>
+                        <div className="accordion-body">
+                            <div className="accordion-body__inner">
+                                <pre className="accordion-body__content">{template.content}</pre>
                             </div>
-                        )}
+                        </div>
                     </div>
                 ))}
             </div>

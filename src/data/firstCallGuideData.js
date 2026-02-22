@@ -1,0 +1,72 @@
+export const firstCallGuideData = {
+    intro: {
+        title: "Your First Call Script",
+        content: `"Hi [Name], thank you for reaching out! I'm really excited about this opportunity at [Company]. I've been following your work on [specific project/product], and I'd love to learn more about the role."`,
+    },
+    dos: [
+        "Research the company and interviewer on LinkedIn before the call",
+        "Keep your resume and the job description in front of you",
+        "Be in a quiet place with good internet/signal 5 mins before",
+        "Speak clearly, smile (it shows in your voice), and use their name",
+        "Have a 60-second elevator pitch ready about yourself",
+        "Take notes during the call — jot down names, key points",
+        "Ask smart questions about the team, tech stack, and culture",
+        "Ask about next steps and the timeline at the end",
+        "Send a thank-you email within 2 hours after the call",
+        "Follow up if you don't hear back within the discussed timeline",
+    ],
+    donts: [
+        "Don't answer salary questions first — say 'I'd love to learn more about the role first'",
+        "Don't badmouth previous employers or colleagues",
+        "Don't interrupt the interviewer — let them finish speaking",
+        "Don't say 'I don't know' without adding 'but I'd learn quickly'",
+        "Don't lie about your experience — be honest about what you're learning",
+        "Don't sound desperate — show genuine interest, not desperation",
+        "Don't forget to ask questions — having no questions looks disinterested",
+        "Don't discuss salary expectations unless they insist (say 'I'm flexible based on the overall package')",
+    ],
+    commonQuestions: [
+        {
+            id: "fc1",
+            q: "Tell me about yourself",
+            a: `"I'm a Full Stack Python Developer with hands-on experience building scalable REST APIs using Django and DRF. I've worked on projects like AIVENT — an AI-driven event platform with microservices architecture — and HopyfyCart, an e-commerce platform. I'm passionate about clean architecture, performance optimization, and I'm currently pursuing my BCA to strengthen my CS fundamentals. I'm excited about this opportunity because [tie to the specific role]."`,
+        },
+        {
+            id: "fc2",
+            q: "Why are you interested in this role?",
+            a: `"I'm drawn to [Company] because of [specific reason — product, tech, mission]. This role aligns perfectly with my experience in [Django/DRF/React/etc.], and I see a great opportunity to contribute to [specific area] while growing in [specific skill]. I've seen how the team [mention something from their blog/LinkedIn], and I'd love to be part of that."`,
+        },
+        {
+            id: "fc3",
+            q: "What's your current/expected salary?",
+            a: `"I'd prefer to understand the full scope of the role and responsibilities first before discussing compensation. I'm flexible and open to a fair offer based on the market rate and the overall package. Could you share the range you have budgeted for this position?"`,
+        },
+        {
+            id: "fc4",
+            q: "What's your notice period?",
+            a: `"I can join within [X days/immediately]. I'm committed to ensuring a smooth transition and can start as soon as the process is completed."`,
+        },
+        {
+            id: "fc5",
+            q: "Why are you leaving your current role?",
+            a: `"I've grown a lot at my current role and I'm grateful for the experience. I'm looking for new challenges where I can work on larger-scale systems and take on more ownership. [Company]'s work on [specific area] really excites me."`,
+        },
+        {
+            id: "fc6",
+            q: "Do you have any questions for us?",
+            a: `ALWAYS ask questions! Try these:\n• "What does a typical day look like for this role?"\n• "What tech stack does the team currently use?"\n• "How is the team structured? Who would I work closely with?"\n• "What are the biggest challenges the team is facing right now?"\n• "What does success look like in the first 90 days?"\n• "What are the next steps in the interview process?"`,
+        },
+    ],
+    preCallChecklist: [
+        "📋 Resume printed or open on screen",
+        "📄 Job description reviewed and highlighted",
+        "🔍 Company researched (LinkedIn, website, recent news)",
+        "👤 Interviewer name Googled (LinkedIn, background)",
+        "🎤 Elevator pitch practiced (60 seconds)",
+        "❓ 3-5 questions prepared to ask them",
+        "🔇 Quiet environment, phone charged, good signal",
+        "📝 Notepad and pen ready",
+        "⏰ Alarm set 10 minutes before",
+        "💧 Water nearby",
+    ],
+};

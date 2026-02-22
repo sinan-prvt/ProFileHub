@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+const ChevronIcon = () => (
+    <svg className="accordion-header__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="5 8 10 13 15 8" />
+    </svg>
+);
+
 const InterviewPrep = () => {
     const [activeCategory, setActiveCategory] = useState("technical");
     const [openId, setOpenId] = useState(null);
@@ -29,61 +35,43 @@ const InterviewPrep = () => {
 
     return (
         <section id="interview-prep">
-            <div className="section-header-bento">
-                <span className="section-tag-bento">Protocols</span>
-                <h2 className="section-title-bento">Interview Mastery</h2>
+            <div className="section-header">
+                <span className="section-tag">Preparation</span>
+                <h2 className="section-title">Interview Q&A</h2>
             </div>
 
-            <div className="interview-tabs" style={{ display: 'flex', gap: '24px', marginBottom: '32px' }}>
+            <div className="tab-bar">
                 {Object.entries(categories).map(([key, cat]) => (
                     <button
                         key={key}
-                        className={`interview-tab ${activeCategory === key ? "interview-tab--active" : ""}`}
+                        className={`tab-btn ${activeCategory === key ? "tab-btn--active" : ""}`}
                         onClick={() => { setActiveCategory(key); setOpenId(null); }}
-                        style={{
-                            background: 'transparent',
-                            border: 'none',
-                            color: activeCategory === key ? 'var(--accent)' : 'var(--text-muted)',
-                            fontSize: '0.8rem',
-                            fontWeight: '800',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.1em',
-                            cursor: 'pointer',
-                            padding: '8px 0',
-                            borderBottom: activeCategory === key ? '2px solid var(--accent)' : '2px solid transparent',
-                            transition: 'all 0.3s'
-                        }}
                     >
                         {cat.label}
                     </button>
                 ))}
             </div>
 
-            <div className="tech-list">
+            <div className="accordion-list">
                 {current.questions.map((item) => (
-                    <div key={item.id} className="tech-item" style={{ padding: 0, overflow: 'hidden' }}>
+                    <div
+                        key={item.id}
+                        className={`accordion-item ${openId === item.id ? "open" : ""}`}
+                    >
                         <div
+                            className="accordion-header"
                             onClick={() => setOpenId(openId === item.id ? null : item.id)}
-                            style={{
-                                padding: '24px',
-                                cursor: 'pointer',
-                                background: openId === item.id ? 'rgba(255,255,255,0.03)' : 'transparent'
-                            }}
                         >
-                            <span style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--text-primary)' }}>{item.q}</span>
-                        </div>
-                        {openId === item.id && (
-                            <div style={{
-                                padding: '24px',
-                                borderTop: '1px solid var(--border)',
-                                background: 'rgba(5, 5, 5, 0.4)',
-                                color: 'var(--text-muted)',
-                                fontSize: '0.95rem',
-                                lineHeight: '1.6'
-                            }}>
-                                {item.a}
+                            <div className="accordion-header__info">
+                                <div className="accordion-header__title">{item.q}</div>
                             </div>
-                        )}
+                            <ChevronIcon />
+                        </div>
+                        <div className="accordion-body">
+                            <div className="accordion-body__inner">
+                                <p className="accordion-body__content">{item.a}</p>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
