@@ -13,6 +13,7 @@ import MorePage from "./pages/MorePage";
 import WhatsAppPage from "./pages/WhatsAppPage";
 import DailyChecklistPage from "./pages/DailyChecklistPage";
 import DataBackupPage from "./pages/DataBackupPage";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/whatsapp" element={<WhatsAppPage />} />
           <Route path="/daily-checklist" element={<DailyChecklistPage />} />
           <Route path="/data-backup" element={<DataBackupPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="/more" element={<MorePage />} />
         </Routes>
       </div>

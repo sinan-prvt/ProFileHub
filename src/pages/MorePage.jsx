@@ -3,6 +3,7 @@ import PageHeader from "../components/PageHeader";
 import AppIcon from "../components/AppIcon";
 
 const moreItems = [
+    { to: "/settings", icon: "settings", title: "Settings", desc: "Project configuration and controls" },
     { to: "/data-backup", icon: "backup", title: "Data Backup", desc: "Export and restore full local data" },
 ];
 
