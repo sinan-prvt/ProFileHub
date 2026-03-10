@@ -148,8 +148,16 @@ button {
 }
 
 .bottom-nav__icon {
-  font-size: 1.2rem;
-  line-height: 1;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-nav__icon-svg {
+  width: 18px;
+  height: 18px;
 }
 
 .bottom-nav__label {
@@ -240,10 +248,21 @@ button {
 }
 
 .home-card__icon {
-  font-size: 1.2rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  text-align: center;
+}
+
+.home-card__icon-svg {
+  width: 18px;
+  height: 18px;
 }
 
 .home-card__content {
@@ -272,6 +291,24 @@ button {
 .home-card:hover .home-card__arrow {
   transform: translateX(2px);
   color: var(--text-secondary);
+}
+
+.home-more {
+  margin-top: 18px;
+}
+
+.home-more__title {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 4px 8px;
+}
+
+.home-grid--single {
+  display: flex;
+  flex-direction: column;
 }
 
 /* ══════════════════════════════════════
@@ -1367,6 +1404,11 @@ button {
   .home-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-grid--single {
+    display: flex;
+    flex-direction: column;
   }
 
   .skills-grid {

@@ -1,11 +1,31 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../components/PageHeader";
 
 const DataBackupPage = () => {
     const [message, setMessage] = useState("");
     const [busy, setBusy] = useState(false);
+    const [cloudStatus, setCloudStatus] = useState("checking");
     const fileInputRef = useRef(null);
     const cloudEndpoint = import.meta.env.VITE_STORAGE_API_BASE || "/.netlify/functions/storage";
+    const autoSyncEnabled =
+        import.meta.env.VITE_ENABLE_CLOUD_SYNC === "true" ||
+        (import.meta.env.PROD && import.meta.env.VITE_ENABLE_CLOUD_SYNC !== "false");
+
+    const checkCloudConnection = async () => {
+        setCloudStatus("checking");
+        try {
+            const response = await fetch(cloudEndpoint);
+            if (!response.ok) throw new Error("Cloud unavailable");
+            await response.json();
+            setCloudStatus("connected");
+        } catch {
+            setCloudStatus("disconnected");
+        }
+    };
+
+    useEffect(() => {
+        checkCloudConnection();
+    }, []);
 
     const exportData = () => {
         const allKeys = Object.keys(localStorage);
@@ -135,9 +155,19 @@ const DataBackupPage = () => {
                 <div className="callout-card">
                     <h3 className="callout-card__title">Cloud Sync (Netlify)</h3>
                     <p className="callout-card__text">Push your full local storage to cloud, or pull cloud data back to this browser.</p>
+                    <p className="callout-card__text">
+                        Auto Sync: {autoSyncEnabled ? "ON" : "OFF"} | Connection: {
+                            cloudStatus === "connected"
+                                ? "Connected"
+                                : cloudStatus === "disconnected"
+                                    ? "Disconnected"
+                                    : "Checking..."
+                        }
+                    </p>
                     <div className="crud-card__actions" style={{ marginTop: "10px" }}>
                         <button className="btn btn--primary btn--sm" onClick={uploadLocalToCloud} disabled={busy}>Upload Local to Cloud</button>
                         <button className="btn btn--secondary btn--sm" onClick={downloadCloudToLocal} disabled={busy}>Restore Cloud to Local</button>
+                        <button className="btn btn--ghost btn--sm" onClick={checkCloudConnection} disabled={busy}>Check Connection</button>
                     </div>
                 </div>
 

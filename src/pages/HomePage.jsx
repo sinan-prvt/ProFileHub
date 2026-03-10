@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
 import { resumeData } from "../data/resumeData";
+import AppIcon from "../components/AppIcon";
 
 const sections = [
-    { to: "/resume", icon: "📋", title: "Resume", desc: "View & download your resume" },
-    { to: "/cover-letters", icon: "📝", title: "Cover Letters", desc: "Store & copy cover letters" },
-    { to: "/emails", icon: "✉️", title: "Email Templates", desc: "Application, follow-up & networking" },
-    { to: "/whatsapp", icon: "💬", title: "WhatsApp Messages", desc: "Separate WhatsApp outreach templates" },
-    { to: "/daily-checklist", icon: "✅", title: "Daily Checklist", desc: "Track portal applications every day" },
-    { to: "/first-call", icon: "📞", title: "First Call Guide", desc: "Scripts, tips & checklists" },
-    { to: "/interview", icon: "🎯", title: "Interview Prep", desc: "Technical & behavioral Q&A" },
-    { to: "/workflow", icon: "🔄", title: "Workflow", desc: "Step-by-step & research checklist" },
-    { to: "/salary", icon: "💰", title: "Salary Negotiation", desc: "Rules, scripts & market data" },
-    { to: "/contact", icon: "📇", title: "Quick Contacts", desc: "Copy your contact info fast" },
+    { to: "/resume", icon: "resume", title: "Resume", desc: "View & download your resume" },
+    { to: "/cover-letters", icon: "letters", title: "Cover Letters", desc: "Store & copy cover letters" },
+    { to: "/emails", icon: "emails", title: "Email Templates", desc: "Application, follow-up & networking" },
+    { to: "/whatsapp", icon: "whatsapp", title: "WhatsApp Messages", desc: "Separate WhatsApp outreach templates" },
+    { to: "/daily-checklist", icon: "checklist", title: "Daily Checklist", desc: "Track portal applications every day" },
+    { to: "/first-call", icon: "call", title: "First Call Guide", desc: "Scripts, tips & checklists" },
+    { to: "/interview", icon: "interview", title: "Interview Prep", desc: "Technical & behavioral Q&A" },
+    { to: "/workflow", icon: "workflow", title: "Workflow", desc: "Step-by-step & research checklist" },
+    { to: "/salary", icon: "salary", title: "Salary Negotiation", desc: "Rules, scripts & market data" },
+    { to: "/contact", icon: "contact", title: "Quick Contacts", desc: "Copy your contact info fast" },
+];
+
+const moreOptions = [
+    { to: "/more", icon: "more", title: "More Options", desc: "Open all extra tools and pages" },
 ];
 
 const HomePage = () => {
@@ -37,7 +42,7 @@ const HomePage = () => {
             <div className="home-grid">
                 {sections.map((s) => (
                     <Link key={s.to} to={s.to} className="home-card">
-                        <span className="home-card__icon">{s.icon}</span>
+                        <span className="home-card__icon"><AppIcon name={s.icon} className="home-card__icon-svg" /></span>
                         <div className="home-card__content">
                             <h3 className="home-card__title">{s.title}</h3>
                             <p className="home-card__desc">{s.desc}</p>
@@ -45,6 +50,22 @@ const HomePage = () => {
                         <span className="home-card__arrow">→</span>
                     </Link>
                 ))}
+            </div>
+
+            <div className="home-more">
+                <p className="home-more__title">More Options</p>
+                <div className="home-grid home-grid--single">
+                    {moreOptions.map((s) => (
+                        <Link key={s.to} to={s.to} className="home-card">
+                            <span className="home-card__icon"><AppIcon name={s.icon} className="home-card__icon-svg" /></span>
+                            <div className="home-card__content">
+                                <h3 className="home-card__title">{s.title}</h3>
+                                <p className="home-card__desc">{s.desc}</p>
+                            </div>
+                            <span className="home-card__arrow">→</span>
+                        </Link>
+                    ))}
+                </div>
             </div>
         </div>
     );

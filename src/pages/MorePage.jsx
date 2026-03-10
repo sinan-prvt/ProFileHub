@@ -1,25 +1,20 @@
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
+import AppIcon from "../components/AppIcon";
 
 const moreItems = [
-    { to: "/resume", icon: "📋", title: "Resume", desc: "View & download" },
-    { to: "/whatsapp", icon: "💬", title: "WhatsApp Messages", desc: "Separate outreach templates" },
-    { to: "/daily-checklist", icon: "✅", title: "Daily Checklist", desc: "Apply-and-track portals each day" },
-    { to: "/data-backup", icon: "💾", title: "Data Backup", desc: "Export and restore full local data" },
-    { to: "/workflow", icon: "🔄", title: "Workflow", desc: "Application strategy" },
-    { to: "/salary", icon: "💰", title: "Salary Negotiation", desc: "Rules, scripts & data" },
-    { to: "/contact", icon: "📇", title: "Quick Contacts", desc: "Copy your info" },
+    { to: "/data-backup", icon: "backup", title: "Data Backup", desc: "Export and restore full local data" },
 ];
 
 const MorePage = () => {
     return (
         <div className="page">
-            <PageHeader title="More" subtitle="Navigation" />
+            <PageHeader title="More" subtitle="Navigation" backTo="/" />
 
             <div className="crud-list">
                 {moreItems.map((item) => (
                     <Link key={item.to} to={item.to} className="home-card">
-                        <span className="home-card__icon">{item.icon}</span>
+                        <span className="home-card__icon"><AppIcon name={item.icon} className="home-card__icon-svg" /></span>
                         <div className="home-card__info">
                             <h3 className="home-card__title">{item.title}</h3>
                             <p className="home-card__desc">{item.desc}</p>

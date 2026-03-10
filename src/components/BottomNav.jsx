@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
+import AppIcon from "./AppIcon";
 
 const navItems = [
-    { to: "/", icon: "🏠", label: "Home" },
-    { to: "/cover-letters", icon: "📝", label: "Letters" },
-    { to: "/emails", icon: "✉️", label: "Emails" },
-    { to: "/first-call", icon: "📞", label: "Calls" },
-    { to: "/interview", icon: "🎯", label: "Interview" },
-    { to: "/more", icon: "⋯", label: "More" },
+    { to: "/", icon: "home", label: "Home" },
+    { to: "/cover-letters", icon: "letters", label: "Letters" },
+    { to: "/emails", icon: "emails", label: "Emails" },
+    { to: "/first-call", icon: "call", label: "Calls" },
+    { to: "/interview", icon: "interview", label: "Interview" },
+    { to: "/more", icon: "more", label: "More" },
 ];
 
 const BottomNav = () => {
@@ -21,7 +22,7 @@ const BottomNav = () => {
                     }
                     end={item.to === "/"}
                 >
-                    <span className="bottom-nav__icon">{item.icon}</span>
+                    <span className="bottom-nav__icon"><AppIcon name={item.icon} className="bottom-nav__icon-svg" /></span>
                     <span className="bottom-nav__label">{item.label}</span>
                 </NavLink>
             ))}
