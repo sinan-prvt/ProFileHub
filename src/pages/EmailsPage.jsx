@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { emailTemplates as defaultData } from "../data/emailTemplatesData";
 import PageHeader from "../components/PageHeader";
@@ -7,7 +7,7 @@ import Modal from "../components/Modal";
 const CATEGORIES = ["All", "Applying", "Follow-Up", "Post-Interview", "Networking", "Offer"];
 
 const EmailsPage = () => {
-    const { data, addItem, updateItem, deleteItem } = useLocalStorage("emailTemplates", defaultData);
+    const { data, setData, addItem, updateItem, deleteItem } = useLocalStorage("emailTemplates_v2", defaultData);
     const [modalOpen, setModalOpen] = useState(false);
     const [editing, setEditing] = useState(null);
     const [openId, setOpenId] = useState(null);
@@ -15,6 +15,42 @@ const EmailsPage = () => {
     const [activeCategory, setActiveCategory] = useState("All");
     const [formData, setFormData] = useState({ title: "", category: "Applying", content: "" });
     const [deleteConfirm, setDeleteConfirm] = useState(null);
+
+    useEffect(() => {
+        // Keep saved templates in sync with new defaults and fix stale placeholders.
+        setData((prev) => {
+            const latestTemplate = defaultData.find((item) => item.id === 10);
+            let changed = false;
+            const withoutWhatsApp = prev.filter((item) => item.id < 11);
+            const existingIds = new Set(withoutWhatsApp.map((item) => item.id));
+            const missingDefaults = defaultData.filter((item) => !existingIds.has(item.id));
+            const withMissingDefaults = missingDefaults.length > 0 ? [...withoutWhatsApp, ...missingDefaults] : withoutWhatsApp;
+
+            if (withoutWhatsApp.length !== prev.length || missingDefaults.length > 0) changed = true;
+
+            const next = withMissingDefaults.map((item) => {
+                if (item.id !== 10) return item;
+                if (!latestTemplate) return item;
+
+                const hasOldPlaceholders =
+                    typeof item.content === "string" &&
+                    (item.content.includes("github.com/yourusername") ||
+                        item.content.includes("linkedin.com/in/yourprofile"));
+
+                if (!hasOldPlaceholders) return item;
+
+                changed = true;
+                return {
+                    ...item,
+                    title: latestTemplate.title,
+                    category: latestTemplate.category,
+                    content: latestTemplate.content,
+                };
+            });
+
+            return changed ? next : prev;
+        });
+    }, [setData]);
 
     const filtered = activeCategory === "All" ? data : data.filter((t) => t.category === activeCategory);
 

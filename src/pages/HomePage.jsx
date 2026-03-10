@@ -5,6 +5,7 @@ const sections = [
     { to: "/resume", icon: "📋", title: "Resume", desc: "View & download your resume" },
     { to: "/cover-letters", icon: "📝", title: "Cover Letters", desc: "Store & copy cover letters" },
     { to: "/emails", icon: "✉️", title: "Email Templates", desc: "Application, follow-up & networking" },
+    { to: "/whatsapp", icon: "💬", title: "WhatsApp Messages", desc: "Separate WhatsApp outreach templates" },
     { to: "/first-call", icon: "📞", title: "First Call Guide", desc: "Scripts, tips & checklists" },
     { to: "/interview", icon: "🎯", title: "Interview Prep", desc: "Technical & behavioral Q&A" },
     { to: "/workflow", icon: "🔄", title: "Workflow", desc: "Step-by-step & research checklist" },

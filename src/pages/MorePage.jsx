@@ -3,6 +3,7 @@ import PageHeader from "../components/PageHeader";
 
 const moreItems = [
     { to: "/resume", icon: "📋", title: "Resume", desc: "View & download" },
+    { to: "/whatsapp", icon: "💬", title: "WhatsApp Messages", desc: "Separate outreach templates" },
     { to: "/workflow", icon: "🔄", title: "Workflow", desc: "Application strategy" },
     { to: "/salary", icon: "💰", title: "Salary Negotiation", desc: "Rules, scripts & data" },
     { to: "/contact", icon: "📇", title: "Quick Contacts", desc: "Copy your info" },

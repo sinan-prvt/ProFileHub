@@ -181,4 +181,28 @@ Thank you again for the opportunity.
 Warm regards,
 Mohamed Sinan`,
     },
+    {
+        id: 10,
+        title: "Application for Junior Python Developer Role",
+        category: "Applying",
+        content: `Subject: Application for Junior Python Developer Role
+
+Dear Hiring Team,
+
+My name is Mohamed Sinan, a Python Full Stack Developer with hands-on experience building scalable backend systems using Python, Django, Django REST Framework, PostgreSQL, and event-driven microservice architectures.
+
+I recently developed and deployed backend services including authentication systems, event-driven notification systems using RabbitMQ, and RESTful APIs designed for scalable applications. I am particularly interested in opportunities where I can contribute to building robust backend systems while continuously improving my engineering skills.
+
+I would welcome the opportunity to discuss how my technical background and project experience can contribute to your development team.
+
+You can review my work here:
+GitHub: https://github.com/sinan-prvt
+LinkedIn: https://www.linkedin.com/in/mohamedsinann/
+Portfolio: https://mohamedsinan.tech/
+
+Thank you for your time and consideration.
+
+Best regards,
+Mohamed Sinan`,
+    },
 ];
