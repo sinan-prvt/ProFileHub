@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { resumeData as defaultResumeData } from "../data/resumeData";
 import PageHeader from "../components/PageHeader";
 import Modal from "../components/Modal";
 
 const defaultResumes = [
-    { id: 1, name: "Mohamed Sinan – Full Stack Developer", label: "Primary Resume", url: "/Mohamed-Sinan-FullStack.pdf", type: "url" },
+    { id: 1, name: "Mohamed Sinan – Full Stack Developer", label: "Primary Resume", url: "/Mohamed_Sinan_FullStack.pdf", type: "url", pinned: true },
+    { id: 2, name: "Mohamed Sinan – Alternate Resume", label: "Secondary Resume", url: "/Mohamed-Sinan-FullStack.pdf", type: "url", pinned: false },
 ];
 
+const legacySummaryText =
+    "Full Stack Python Developer specializing in backend development with Python, Django, and Django REST Framework, with hands-on experience building scalable REST APIs and secure, data-driven systems. Strong background in PostgreSQL optimization, API integration, and cloud deployments using AWS and Docker. Proficient in developing responsive React-based frontends that integrate seamlessly with robust backend services, with a focus on performance, reliability, and clean architecture.";
+
 const ResumePage = () => {
-    const { data: resumes, addItem: addResume, updateItem: updateResume, deleteItem: deleteResume } = useLocalStorage("resumes", defaultResumes);
-    const { data: experience, addItem: addExp, updateItem: updateExp, deleteItem: deleteExp } = useLocalStorage("resumeExperience", defaultResumeData.experience);
-    const { data: projects, addItem: addProj, updateItem: updateProj, deleteItem: deleteProj } = useLocalStorage("resumeProjects", defaultResumeData.projects);
-    const { data: skills, addItem: addSkill, updateItem: updateSkill, deleteItem: deleteSkill } = useLocalStorage("resumeSkills", defaultResumeData.skills.map((s, i) => ({ ...s, id: i + 1 })));
+    const { data: resumes, setData: setResumes, addItem: addResume, updateItem: updateResume, deleteItem: deleteResume } = useLocalStorage("resumes", defaultResumes);
+    const { data: experience, setData: setExperience, addItem: addExp, updateItem: updateExp, deleteItem: deleteExp } = useLocalStorage("resumeExperience", defaultResumeData.experience);
+    const { data: projects, setData: setProjects, addItem: addProj, updateItem: updateProj, deleteItem: deleteProj } = useLocalStorage("resumeProjects", defaultResumeData.projects);
+    const { data: skills, setData: setSkills, addItem: addSkill, updateItem: updateSkill, deleteItem: deleteSkill } = useLocalStorage("resumeSkills", defaultResumeData.skills.map((s, i) => ({ ...s, id: i + 1 })));
     const { data: education, addItem: addEdu, updateItem: updateEdu, deleteItem: deleteEdu } = useLocalStorage("resumeEducation", defaultResumeData.education);
     const { data: certs, addItem: addCert, updateItem: updateCert, deleteItem: deleteCert } = useLocalStorage("resumeCerts", defaultResumeData.certifications.map((c, i) => ({ id: i + 1, text: c })));
     const { data: summary, setData: setSummary } = useLocalStorage("resumeSummary", defaultResumeData.summary);
@@ -26,6 +30,134 @@ const ResumePage = () => {
     const [uploadMode, setUploadMode] = useState("url");
     const [editingSummary, setEditingSummary] = useState(false);
     const [summaryDraft, setSummaryDraft] = useState("");
+
+    const normalizedResumes = [...(Array.isArray(resumes) ? resumes : [])].sort((a, b) => Number(Boolean(b.pinned)) - Number(Boolean(a.pinned)));
+
+    useEffect(() => {
+        // Ensure both default resumes exist and the new real PDF stays default/pinned.
+        setResumes((prev) => {
+            const safePrev = Array.isArray(prev) ? prev : [];
+
+            if (safePrev.length === 0) {
+                return defaultResumes;
+            }
+
+            let changed = false;
+            let migrated = safePrev.map((item) => {
+                if (!item || item.type !== "url" || typeof item.url !== "string") return item;
+
+                if (item.url.includes("/Mohamed-Sinan-FullStack.pdf")) {
+                    changed = true;
+                    // Keep old file as secondary only when explicitly configured (id 2).
+                    if (item.id === 2) return { ...item, url: "/Mohamed-Sinan-FullStack.pdf", pinned: false };
+                    return { ...item, url: "/Mohamed_Sinan_FullStack.pdf" };
+                }
+
+                return item;
+            });
+
+            const hasPrimary = migrated.some((item) => item.id === 1 || item.url === "/Mohamed_Sinan_FullStack.pdf");
+            const hasSecondary = migrated.some((item) => item.id === 2 || item.url === "/Mohamed-Sinan-FullStack.pdf");
+
+            if (!hasPrimary) {
+                changed = true;
+                migrated.unshift(defaultResumes[0]);
+            }
+
+            if (!hasSecondary) {
+                changed = true;
+                migrated.push(defaultResumes[1]);
+            }
+
+            // Force exactly one pinned resume, preferring the new real resume file.
+            const preferredId = migrated.find((item) => item.url === "/Mohamed_Sinan_FullStack.pdf")?.id ?? 1;
+            migrated = migrated.map((item) => {
+                const shouldPin = item.id === preferredId;
+                if (Boolean(item.pinned) !== shouldPin) {
+                    changed = true;
+                    return { ...item, pinned: shouldPin };
+                }
+                return item;
+            });
+
+            return changed ? migrated : prev;
+        });
+    }, [setResumes]);
+
+    useEffect(() => {
+        // Refresh default summary text for users who still have the old template summary.
+        if (summary === legacySummaryText) {
+            setSummary(defaultResumeData.summary);
+        }
+    }, [summary, setSummary]);
+
+    useEffect(() => {
+        // Ensure missing latest resume project is present in persisted data.
+        setProjects((prev) => {
+            const safePrev = Array.isArray(prev) ? prev : [];
+            const hasResiko = safePrev.some((p) => (p?.title || "").toLowerCase().includes("resiko"));
+            if (hasResiko) return prev;
+
+            const resiko = defaultResumeData.projects.find((p) => p.title.toLowerCase().includes("resiko"));
+            if (!resiko) return prev;
+
+            const maxId = safePrev.reduce((m, p) => Math.max(m, Number(p?.id) || 0), 0);
+            return [...safePrev, { ...resiko, id: maxId + 1 }];
+        });
+    }, [setProjects]);
+
+    useEffect(() => {
+        // Replace untouched legacy skill groups with the latest baseline from resumeData.
+        setSkills((prev) => {
+            const safePrev = Array.isArray(prev) ? prev : [];
+            if (safePrev.length === 0) return prev;
+
+            const categories = safePrev.map((item) => String(item?.category || "").toLowerCase());
+            const hasLegacyCategories = categories.includes("databases") || categories.includes("additional tools");
+            const hasNewCategories = categories.includes("ai & llm") || categories.includes("databases & caching");
+
+            if (!hasLegacyCategories || hasNewCategories) return prev;
+
+            return defaultResumeData.skills.map((skill, index) => ({
+                ...skill,
+                id: index + 1,
+            }));
+        });
+    }, [setSkills]);
+
+    useEffect(() => {
+        // Align legacy company/role values with latest resume baseline.
+        setExperience((prev) => {
+            const safePrev = Array.isArray(prev) ? prev : [];
+            let changed = false;
+
+            const next = safePrev.map((item) => {
+                if (!item) return item;
+                let updated = item;
+
+                if ((item.company || "") === "Bridgeon Solutions LLP") {
+                    updated = { ...updated, company: "Bridgeon Skillvercity LLP" };
+                    changed = true;
+                }
+
+                if ((item.role || "") === "Python Full Stack Developer Intern") {
+                    updated = { ...updated, role: "Python Full Stack Developer" };
+                    changed = true;
+                }
+
+                return updated;
+            });
+
+            return changed ? next : prev;
+        });
+    }, [setExperience]);
+
+    const handlePinResume = (id) => {
+        setResumes((prev) => {
+            const safePrev = Array.isArray(prev) ? prev : [];
+            return safePrev.map((item) => ({ ...item, pinned: item.id === id }));
+        });
+    };
 
     // ── Resume CRUD ──
     const openResumeModal = (item = null) => {
@@ -151,16 +283,20 @@ const ResumePage = () => {
             {activeView === "resumes" && (
                 <div className="crud-list">
                     {resumes.length === 0 && <p className="empty-state">No resumes yet. Tap + Add to upload.</p>}
-                    {resumes.map((resume) => (
+                    {normalizedResumes.map((resume) => (
                         <div key={resume.id} className="resume-card">
                             <div className="resume-card__icon">📄</div>
                             <div className="resume-card__info">
                                 <h3 className="resume-card__name">{resume.name}</h3>
                                 {resume.label && <span className="resume-card__label">{resume.label}</span>}
+                                {resume.pinned && <span className="resume-card__label" style={{ marginLeft: "6px" }}>Default</span>}
                             </div>
                             <div className="resume-card__actions">
                                 <a href={resume.url} className="btn btn--copy" target="_blank" rel="noopener noreferrer" title="View">👁️</a>
                                 <a href={resume.url} className="btn btn--copy" download={`${resume.name}.pdf`} title="Download">↓</a>
+                                <button className="btn btn--ghost btn--sm" onClick={() => handlePinResume(resume.id)} title="Set default">
+                                    {resume.pinned ? "Pinned" : "Pin"}
+                                </button>
                                 <button className="btn-icon" onClick={() => openResumeModal(resume)} title="Edit">✏️</button>
                                 <DeleteBtn confirmKey={`res-${resume.id}`} type="resume" id={resume.id} />
                             </div>

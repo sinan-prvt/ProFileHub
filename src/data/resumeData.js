@@ -2,14 +2,14 @@ export const resumeData = {
   name: "Mohamed Sinan",
   title: "Full Stack Python Django Developer",
   summary:
-    "Full Stack Python Developer specializing in backend development with Python, Django, and Django REST Framework, with hands-on experience building scalable REST APIs and secure, data-driven systems. Strong background in PostgreSQL optimization, API integration, and cloud deployments using AWS and Docker. Proficient in developing responsive React-based frontends that integrate seamlessly with robust backend services, with a focus on performance, reliability, and clean architecture.",
-  resumeUrl: "/Mohamed-Sinan-FullStack.pdf",
+    "Full Stack Python Developer specializing in backend development with Python, Django, and Django REST Framework, with hands-on experience building scalable REST APIs and secure, data-driven systems. Strong background in PostgreSQL optimization, API integration, and cloud deployments using AWS and Docker. Proficient in developing responsive React-based frontends that integrate seamlessly with robust backend services, with a focus on performance, reliability, and clean architecture. Applied structured error handling, input validation, and API status codes to improve reliability and maintainability of backend services.",
+  resumeUrl: "/Mohamed_Sinan_FullStack.pdf",
 
   experience: [
     {
       id: 1,
-      role: "Python Full Stack Developer Intern",
-      company: "Bridgeon Solutions LLP",
+      role: "Python Full Stack Developer",
+      company: "Bridgeon Skillvercity LLP",
       location: "Calicut, Kerala",
       period: "2025 – Present",
       highlights: [
@@ -26,7 +26,7 @@ export const resumeData = {
   projects: [
     {
       id: 1,
-      title: "AIVENT",
+      title: "Aivent",
       subtitle: "Universal Event Operating System",
       highlights: [
         "Orchestrated a full-stack AI-driven event platform supporting 3 user roles (vendors, customers, admins) within a unified system",
@@ -38,6 +38,18 @@ export const resumeData = {
     },
     {
       id: 2,
+      title: "Resiko",
+      subtitle: "AI-Powered Resume Optimization Platform",
+      highlights: [
+        "Built a multi-agent ATS optimization system using LangGraph and Groq (Llama 3.3) for real-time resume analysis and rewriting",
+        "Developed backend services with FastAPI, PostgreSQL, SQLAlchemy, and live progress updates via SSE",
+        "Implemented an iterative Plan -> Modify -> Rescore loop to improve ATS scores (0–100) against job descriptions",
+        "Added Missing Skills Analyzer and automated PDF/LaTeX resume generation",
+        "Created a responsive UI using React (Vite) and Tailwind CSS with transparent decision traces",
+      ],
+    },
+    {
+      id: 3,
       title: "HopyfyCart",
       subtitle: "E-Commerce Platform",
       highlights: [
@@ -64,11 +76,13 @@ export const resumeData = {
   ],
 
   skills: [
-    { category: "Backend", items: ["Python", "Django", "Django REST Framework (DRF)"] },
-    { category: "Frontend", items: ["React", "Redux", "Tailwind CSS", "JavaScript", "HTML", "CSS", "Axios"] },
-    { category: "Databases", items: ["PostgreSQL", "ORM (Django ORM)"] },
-    { category: "Cloud & DevOps", items: ["AWS (EC2, S3, RDS, SES, SQS, Lambda)", "Docker", "Git", "GitHub", "Postman"] },
-    { category: "Additional Tools", items: ["API Integration", "Payment Gateway Integration (Razorpay)", "Unit Testing", "RESTful API Development", "Authentication (JWT)", "Microservices Architecture"] },
+    { category: "Backend", items: ["Python", "Django", "Django REST Framework (DRF)", "FastAPI", "SQLAlchemy", "Pydantic", "Celery", "Django Channels"] },
+    { category: "AI & LLM", items: ["LangChain", "LangGraph", "Agentic Workflows", "Groq (Llama 3)", "Ollama", "Prompt Engineering", "ATS Optimization"] },
+    { category: "Frontend", items: ["React", "Redux", "Tailwind CSS", "JavaScript", "HTML", "CSS", "Axios", "Vitest"] },
+    { category: "Databases & Caching", items: ["PostgreSQL", "Django ORM", "Redis"] },
+    { category: "Messaging & Async", items: ["RabbitMQ", "Pika", "Celery"] },
+    { category: "Cloud & DevOps", items: ["AWS", "Azure", "Docker", "Kubernetes", "Nginx", "Vercel", "Netlify", "Render", "PythonAnywhere"] },
+    { category: "Tools & Practices", items: ["Git", "GitHub", "Jira", "Postman", "Swagger (OpenAPI)", "Pytest", "Boto3", "Jinja2", "RESTful API Development", "Microservices Architecture", "API Integration"] },
   ],
 
   certifications: [
