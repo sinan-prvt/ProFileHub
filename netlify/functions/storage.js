@@ -2,11 +2,11 @@ import { getStore } from "@netlify/blobs";
 
 const store = getStore("app-storage");
 
-const json = (statusCode, payload) => ({
-    statusCode,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-});
+const json = (statusCode, payload) =>
+    new Response(JSON.stringify(payload), {
+        status: statusCode,
+        headers: { "Content-Type": "application/json" },
+    });
 
 export default async (req) => {
     try {
