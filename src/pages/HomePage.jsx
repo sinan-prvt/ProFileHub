@@ -6,6 +6,7 @@ const sections = [
     { to: "/cover-letters", icon: "📝", title: "Cover Letters", desc: "Store & copy cover letters" },
     { to: "/emails", icon: "✉️", title: "Email Templates", desc: "Application, follow-up & networking" },
     { to: "/whatsapp", icon: "💬", title: "WhatsApp Messages", desc: "Separate WhatsApp outreach templates" },
+    { to: "/daily-checklist", icon: "✅", title: "Daily Checklist", desc: "Track portal applications every day" },
     { to: "/first-call", icon: "📞", title: "First Call Guide", desc: "Scripts, tips & checklists" },
     { to: "/interview", icon: "🎯", title: "Interview Prep", desc: "Technical & behavioral Q&A" },
     { to: "/workflow", icon: "🔄", title: "Workflow", desc: "Step-by-step & research checklist" },

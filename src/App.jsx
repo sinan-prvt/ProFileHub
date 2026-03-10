@@ -11,6 +11,8 @@ import SalaryPage from "./pages/SalaryPage";
 import ContactPage from "./pages/ContactPage";
 import MorePage from "./pages/MorePage";
 import WhatsAppPage from "./pages/WhatsAppPage";
+import DailyChecklistPage from "./pages/DailyChecklistPage";
+import DataBackupPage from "./pages/DataBackupPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/salary" element={<SalaryPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/whatsapp" element={<WhatsAppPage />} />
+          <Route path="/daily-checklist" element={<DailyChecklistPage />} />
+          <Route path="/data-backup" element={<DataBackupPage />} />
           <Route path="/more" element={<MorePage />} />
         </Routes>
       </div>

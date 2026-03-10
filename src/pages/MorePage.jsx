@@ -4,6 +4,8 @@ import PageHeader from "../components/PageHeader";
 const moreItems = [
     { to: "/resume", icon: "📋", title: "Resume", desc: "View & download" },
     { to: "/whatsapp", icon: "💬", title: "WhatsApp Messages", desc: "Separate outreach templates" },
+    { to: "/daily-checklist", icon: "✅", title: "Daily Checklist", desc: "Apply-and-track portals each day" },
+    { to: "/data-backup", icon: "💾", title: "Data Backup", desc: "Export and restore full local data" },
     { to: "/workflow", icon: "🔄", title: "Workflow", desc: "Application strategy" },
     { to: "/salary", icon: "💰", title: "Salary Negotiation", desc: "Rules, scripts & data" },
     { to: "/contact", icon: "📇", title: "Quick Contacts", desc: "Copy your info" },
