@@ -82,7 +82,7 @@ const ResumePage = () => {
 
             return changed ? migrated : prev;
         });
-    }, [setResumes]);
+    }, [resumes, setResumes]);
 
     useEffect(() => {
         // Refresh default summary text for users who still have the old template summary.
@@ -104,7 +104,7 @@ const ResumePage = () => {
             const maxId = safePrev.reduce((m, p) => Math.max(m, Number(p?.id) || 0), 0);
             return [...safePrev, { ...resiko, id: maxId + 1 }];
         });
-    }, [setProjects]);
+    }, [projects, setProjects]);
 
     useEffect(() => {
         // Replace untouched legacy skill groups with the latest baseline from resumeData.
@@ -123,7 +123,7 @@ const ResumePage = () => {
                 id: index + 1,
             }));
         });
-    }, [setSkills]);
+    }, [skills, setSkills]);
 
     useEffect(() => {
         // Align legacy company/role values with latest resume baseline.
@@ -150,7 +150,7 @@ const ResumePage = () => {
 
             return changed ? next : prev;
         });
-    }, [setExperience]);
+    }, [experience, setExperience]);
 
     const handlePinResume = (id) => {
         setResumes((prev) => {
