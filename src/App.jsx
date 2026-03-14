@@ -11,6 +11,7 @@ import SalaryPage from "./pages/SalaryPage";
 import ContactPage from "./pages/ContactPage";
 import MorePage from "./pages/MorePage";
 import WhatsAppPage from "./pages/WhatsAppPage";
+import LinkedInPage from "./pages/LinkedInPage";
 import DailyChecklistPage from "./pages/DailyChecklistPage";
 import DataBackupPage from "./pages/DataBackupPage";
 import SettingsPage from "./pages/SettingsPage";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/salary" element={<SalaryPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/whatsapp" element={<WhatsAppPage />} />
+          <Route path="/linkedin" element={<LinkedInPage />} />
           <Route path="/daily-checklist" element={<DailyChecklistPage />} />
           <Route path="/data-backup" element={<DataBackupPage />} />
           <Route path="/settings" element={<SettingsPage />} />

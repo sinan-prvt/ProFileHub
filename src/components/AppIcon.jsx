@@ -84,6 +84,15 @@ const icons = {
     more: (
         <path d="M5 10h.01M10 10h.01M15 10h.01" />
     ),
+    linkedin: (
+        <>
+            <rect x="3" y="3" width="14" height="14" rx="2" />
+            <path d="M7 9v6" />
+            <circle cx="7" cy="6.5" r=".8" fill="currentColor" stroke="none" />
+            <path d="M11 9v6" />
+            <path d="M11 12a2.5 2.5 0 0 1 5 0v3" />
+        </>
+    ),
 };
 
 const AppIcon = ({ name, className = "" }) => (
