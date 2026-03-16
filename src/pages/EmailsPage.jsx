@@ -21,12 +21,12 @@ const EmailsPage = () => {
         setData((prev) => {
             const latestTemplate = defaultData.find((item) => item.id === 10);
             let changed = false;
-            const withoutWhatsApp = prev.filter((item) => item.id < 11);
-            const existingIds = new Set(withoutWhatsApp.map((item) => item.id));
+            const safePrev = Array.isArray(prev) ? prev : [];
+            const existingIds = new Set(safePrev.map((item) => item.id));
             const missingDefaults = defaultData.filter((item) => !existingIds.has(item.id));
-            const withMissingDefaults = missingDefaults.length > 0 ? [...withoutWhatsApp, ...missingDefaults] : withoutWhatsApp;
+            const withMissingDefaults = missingDefaults.length > 0 ? [...safePrev, ...missingDefaults] : safePrev;
 
-            if (withoutWhatsApp.length !== prev.length || missingDefaults.length > 0) changed = true;
+            if (missingDefaults.length > 0) changed = true;
 
             const next = withMissingDefaults.map((item) => {
                 if (item.id !== 10) return item;

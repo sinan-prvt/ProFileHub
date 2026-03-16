@@ -205,4 +205,10 @@ Thank you for your time and consideration.
 Best regards,
 Mohamed Sinan`,
     },
+    {
+        id: 11,
+        title: "Reason for Applying - Backend Python Role",
+        category: "Applying",
+        content: `I am applying because I have a strong interest in backend development using Python. I have built projects using Django, Django REST Framework, and PostgreSQL, and enjoy solving real-world problems through scalable APIs and clean architecture. I am eager to start my career as a Python developer, learn from experienced engineers, and contribute to building reliable software systems.`,
+    },
 ];
