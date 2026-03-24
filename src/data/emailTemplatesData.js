@@ -221,13 +221,18 @@ Hi [Name],
 
 I came across your hiring requirement for a Python Full Stack Developer and wanted to apply.
 
-I have hands-on experience building scalable backend systems using Django, Django REST Framework, and PostgreSQL.
+I have hands-on experience building backend systems using Django, Django REST Framework, and PostgreSQL.
 
-I have also built real-world projects like Aivent (a microservices-based event platform using Django, DRF, React, and Docker).
+I have built projects including:
+- Aivent - a microservices-based event platform using DRF, RabbitMQ, and Docker
+- Resiko - a real-world AI-powered resume optimization platform built with FastAPI and LangGraph
+- HopifyCart - an e-commerce platform with payment integration and AWS deployment
 
-I am actively looking for an opportunity where I can contribute to building scalable systems.
+Through these, I have gained strong experience in scalable architecture and async processing.
 
-I would be happy to discuss how I can contribute to your team.
+I am actively looking for an opportunity where I can contribute and grow as a backend-focused developer.
+
+I'd be happy to discuss how I can contribute to your team.
 
 Looking forward to your response.
 
@@ -235,7 +240,7 @@ Best regards,
 Mohamed Sinan
 Phone: +91 9400 850 450
 Email: mohamedsinan9400@gmail.com
-LinkedIn: https://www.linkedin.com/in/mohamedsinann/
-Portfolio: https://mohamedsinan.tech/`,
+LinkedIn: [add link]
+Portfolio: [add link]`,
     },
 ];
