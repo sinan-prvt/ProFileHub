@@ -211,4 +211,31 @@ Mohamed Sinan`,
         category: "Applying",
         content: `I am applying because I have a strong interest in backend development using Python. I have built projects using Django, Django REST Framework, and PostgreSQL, and enjoy solving real-world problems through scalable APIs and clean architecture. I am eager to start my career as a Python developer, learn from experienced engineers, and contribute to building reliable software systems.`,
     },
+    {
+        id: 12,
+        title: "FINAL EMAIL (Use This Directly)",
+        category: "Applying",
+        content: `Subject: Application for Python Full Stack Developer | Django, DRF, React | Immediate Joiner
+
+Hi [Name],
+
+I came across your hiring requirement for a Python Full Stack Developer and wanted to apply.
+
+I have hands-on experience building scalable backend systems using Django, Django REST Framework, and PostgreSQL.
+
+I have also built real-world projects like Aivent (a microservices-based event platform using Django, DRF, React, and Docker).
+
+I am actively looking for an opportunity where I can contribute to building scalable systems.
+
+I would be happy to discuss how I can contribute to your team.
+
+Looking forward to your response.
+
+Best regards,
+Mohamed Sinan
+Phone: +91 9400 850 450
+Email: mohamedsinan9400@gmail.com
+LinkedIn: https://www.linkedin.com/in/mohamedsinann/
+Portfolio: https://mohamedsinan.tech/`,
+    },
 ];
