@@ -5,7 +5,7 @@ import AppIcon from "../components/AppIcon";
 const sections = [
     { to: "/resume", icon: "resume", title: "Resume", desc: "View & download your resume" },
     { to: "/cover-letters", icon: "letters", title: "Cover Letters", desc: "Store & copy cover letters" },
-    { to: "/emails", icon: "emails", title: "Email Templates", desc: "Application, follow-up & networking" },
+    { to: "/emails", icon: "emails", title: "Why Hire Me?", desc: "Interview pitches & answers" },
     { to: "/whatsapp", icon: "whatsapp", title: "WhatsApp Messages", desc: "Separate WhatsApp outreach templates" },
     { to: "/linkedin", icon: "linkedin", title: "LinkedIn Messages", desc: "Connection request & networking templates" },
     { to: "/daily-checklist", icon: "checklist", title: "Daily Checklist", desc: "Track portal applications every day" },
@@ -28,7 +28,7 @@ const HomePage = () => {
                 <h1 className="hero__name">{resumeData.name}</h1>
                 <p className="hero__role">{resumeData.title}</p>
                 <p className="hero__bio">
-                    Your personal toolkit to organize cover letters, email templates, interview prep, and more — all in one place.
+                    Your personal toolkit to organize cover letters, interview pitches, interview prep, and more — all in one place.
                 </p>
                 <div className="hero__actions">
                     <a href={resumeData.resumeUrl} className="btn btn--primary" download>
